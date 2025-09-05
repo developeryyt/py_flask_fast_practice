@@ -1,8 +1,9 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, make_response
 import requests
-
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 
 
@@ -60,6 +61,11 @@ def loop_test():
 def get_google():
     response = requests.get("http://www.google.co.kr")
     return response.text
+
+@app.route('/test')
+def test1():
+    return make_response(jsonify(success=True), 200)
+
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)
