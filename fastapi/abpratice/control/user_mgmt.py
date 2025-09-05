@@ -36,7 +36,6 @@ class User(UserMixin):
         user = db_cursor.fetchone()
         if not user:
             return None
-
         user = User(user_id=user[0], user_email=user[1], blog_id=user[2])
         return user
 
@@ -52,3 +51,12 @@ class User(UserMixin):
             return User.find(user_email)
         else:
             return user
+
+    @staticmethod
+    def delete(user_id):
+        mysql_db = conn_mysqldb()
+        db_cursor = mysql_db.cursor()
+        sql = "DELETE FROM user_info WHERE USER_ID = '" + str(user_id) + "'"
+        deleted = db_cursor.execute(sql)
+        mysql_db.commit()
+        return deleted
