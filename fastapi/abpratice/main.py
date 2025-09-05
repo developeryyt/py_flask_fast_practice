@@ -2,13 +2,14 @@ from flask import Flask, jsonify, request, render_template, make_response
 from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask_cors import CORS
 from view import blog
+from control.user_mgmt import User
 import os
 
 #https 만을 지원하는 기능을 http에서 테스트할때 필요한 설정
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 app = Flask(__name__, static_url_path='/static')
 CORS(app)
-app.secure_key = 'patrick_server'
+app.secret_key = 'patrick_server'
 
 
 app.register_blueprint(blog.blog_abtest, url_prefix='/blog')
