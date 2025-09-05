@@ -1,5 +1,5 @@
-from db_model.mongodb import conn_mongodb
 from datetime import datetime
+from ..db_model.mongodb import conn_mongodb
 
 
 class BlogSession():
